@@ -1,1 +1,99 @@
+@use '~@angular/material' as mat;
+@include mat.core();
+$light-primary: mat.define-palette(mat.$indigo-palette);
+$light-accent: mat.define-palette(mat.$pink-palette);
+$light-warn: mat.define-palette(mat.$yellow-palette);
+$light-theme: mat.define-light-theme((color: (primary: $light-primary, accent: $light-accent, warn: $light-warn,)));
+
+$dark-primary: mat.define-palette(mat.$blue-grey-palette);
+$dark-accent: mat.define-palette(mat.$deep-orange-palette,A100);
+$dark-warn: mat.define-palette(mat.$teal-palette);
+$dark-theme: mat.define-dark-theme((color: (primary: $dark-primary, accent: $dark-accent, warn: $dark-warn,),));
+@include mat.core-theme($light-theme);
+//@include mat.all-component-typographies($light-theme);
+@include mat.button-theme($light-theme);
+@include mat.sidenav-theme($light-theme);
+@include mat.select-theme($light-theme);
+@include mat.toolbar-theme($light-theme);
+@include mat.icon-theme($light-theme);
+@include mat.list-theme($light-theme);
+@include mat.form-field-theme($light-theme);
+@include mat.progress-bar-theme($light-theme);
+@include mat.input-theme($light-theme);
+@include mat.divider-theme($light-theme);
+@include mat.snack-bar-theme($light-theme);
+@include mat.menu-theme($light-theme);
+@include mat.progress-spinner-theme($light-theme);
+// Apply the dark theme only when the `.my-light-theme` CSS class is applied
+// to an ancestor element of the components (such as `body`).
+
+.dark-theme {
+  @include mat.core-color($dark-theme);
+  @include mat.button-color($dark-theme);
+  @include mat.sidenav-color($dark-theme);
+  @include mat.select-color($dark-theme);
+  @include mat.toolbar-color($dark-theme);
+  @include mat.icon-color($dark-theme);
+  @include mat.list-color($dark-theme);
+  @include mat.form-field-color($dark-theme);
+  @include mat.progress-bar-color($dark-theme);
+  @include mat.input-color($dark-theme);
+  @include mat.divider-color($dark-theme);
+  @include mat.snack-bar-color($dark-theme);
+  @include mat.menu-color($dark-theme);
+  @include mat.progress-spinner-color($dark-theme);
+}
+
+
+//:root {
+//  --blue1: mat.get-color-from-palette(mat.define-palette(mat.$indigo-palette), 600);;
+//  --blue2: mat.get-color-from-palette(mat.$indigo-palette,200);
+//  --blue3: mat.get-color-from-palette(mat.$indigo-palette,300);
+//  --blue4: mat.get-color-from-palette(mat.$indigo-palette,400);
+//  --blue5: mat.get-color-from-palette(mat.$indigo-palette,500);
+//  --white: #ffffff;
+//}
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+//@include mat.all-component-themes($dark-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+$my-back: mat.get-color-from-palette(mat.define-palette(mat.$indigo-palette),);
+$my-back-darker: mat.get-color-from-palette(mat.define-palette(mat.$indigo-palette), 600);
+$my-back-light: mat.get-color-from-palette(mat.define-palette(mat.$indigo-palette), 100);
+$my-palette: mat.define-palette(mat.$indigo-palette);
+//@include mat.strong-focus-indicators((
+//  border-style: solid,
+//  border-width: 2px,
+//  border-radius: 12px,
+//));
+//@include mat.strong-focus-indicators-theme($dark-theme);
+$my-palette: mat.define-palette(mat.$indigo-palette);
+.my-custom-style {
+ background: mat.get-color-from-palette($my-palette, 900);
+ color: mat.get-color-from-palette($my-palette, 500-contrast);
+}
+.my-custom-darker-style {
+ background: mat.get-color-from-palette($my-palette,lighter);
+ color: mat.get-color-from-palette($my-palette, darker-contrast);
+}
+.primary{
+  color: mat.get-color-from-palette($my-palette, 500-contrast);
+  background-color: mat.get-color-from-palette($light-primary,300);
+}
+.primary-darker{
+  color: mat.get-color-from-palette($my-palette, darker-contrast);
+  background-color: mat.get-color-from-palette($light-primary,600);
+}
+.btn:hover{
+  color: mat.get-color-from-palette($light-primary, darker-contrast);
+  background-color: mat.get-color-from-palette($light-primary,300);
+  transform: scale(1.05 );
+  z-index: 1;
+}
+
