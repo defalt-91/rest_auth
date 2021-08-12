@@ -32,16 +32,21 @@ import {StoreRouterConnectingModule} from "@ngrx/router-store";
 import {ROUTER_STATE_SERIALIZER_PROVIDER} from "./_shared/custom-serializer";
 // import {UserEffects} from "./store/UserFeatureStore/effects/user-feature-store.effects";
 import {UserFeatureStoreModule} from "./store/UserFeatureStore/user-feature-store.module";
+import { LoaderComponent } from './components/loader/loader.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, MyspinnerComponent, SidebarComponent],
+  declarations: [AppComponent,
+    NavComponent, MyspinnerComponent,
+    SidebarComponent, LoaderComponent, CarouselComponent,
+    ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     HttpClientXsrfModule.withOptions({
-      cookieName: "x-csrftoken",
-      headerName: "X-CSRFToken",
+      cookieName: "csrftoken",
+      headerName: "CSRFTOKEN",
     }),
     FormsModule,
     ReactiveFormsModule,
@@ -64,6 +69,7 @@ import {UserFeatureStoreModule} from "./store/UserFeatureStore/user-feature-stor
     !environment.production ? StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}) : [],
     StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
   ],
+
   providers: [
     HttpInterceptorProviders,
     ROUTER_STATE_SERIALIZER_PROVIDER,

@@ -5,13 +5,14 @@ import {AuthGuard} from "./_guards/auth.guard";
 const routes: Routes = [
   {
     path: "login",
+    data:{animation:''},
     // canLoad:[LogedinGuard],
     loadChildren: () =>
       import("./views/login/login.module").then((m) => m.LoginModule),
   },
   {
     path: "post",
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadChildren: () =>
       import("./views/post/post-routing.module").then((m) => m.PostRoutingModule),
   },

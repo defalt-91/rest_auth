@@ -1,0 +1,22 @@
+
+.example-button {
+  margin-top: 16px;
+}
+
+@mixin arman {
+  background-color: #0078cf;
+}
+
+.example-tooltip-red {
+  background: #b71c1c;
+}
+
+button{
+  //@include mat.elevation-transition();
+  //@include mat.elevation(2);
+  //@include button-base.base;
+  //background-color: $primary-light;
+  //&:hover{
+  //  @include mat.elevation(7)
+  //}
+}

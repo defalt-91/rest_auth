@@ -1,10 +1,17 @@
-<app-nav >
+<app-nav>
   <div [@routeAnimation]="getAnimationData(routerOutlet)">
-      <app-sidebar></app-sidebar>
-    <h1>{{user$|async}}</h1>
+    <app-sidebar></app-sidebar>
+    <h1>{{ user$ | async }}</h1>
     <button (click)="logout()" mat-stroked-button>logout</button>
-    <button class="btn" color="primary" (click)="islogin()" mat-stroked-button>primary</button>
-
+    <button [classList]="'mybtn'" color="primary" (click)="islogin()">
+      primary
+    </button>
+    <button class="foo-button">my foo button</button>
+    <button mat-stroked-button>my stroked</button>
+    <button mat-raised-button>my raised</button>
+    <button mat-button>my button</button>
     <router-outlet #routerOutlet="outlet"></router-outlet>
+    <app-carousel></app-carousel>
   </div>
+  <app-loader></app-loader>
 </app-nav>

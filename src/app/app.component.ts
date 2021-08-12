@@ -36,11 +36,9 @@ export class AppComponent {
     // )
   }
 
-  getAnimationData(outlet: RouterOutlet) {
-    return (
-      outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation
-    );
-  }
+  getAnimationData = (outlet: RouterOutlet) => (
+    outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation
+  );
 
   logout() {
     this.authService.logout();
