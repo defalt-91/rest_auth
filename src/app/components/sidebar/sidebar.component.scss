@@ -1,0 +1,92 @@
+//@use '~@angular/material' as mat;
+
+#rightBar {
+  position: absolute;
+  z-index: 22;
+  right: 1em;
+  height: 80%;
+  width: 3em;
+  top: 7em;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  //background-color: mat.get-color-from-palette(mat.$deep-orange-palette);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+  right: 30px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+//$my-back: mat.get-color-from-palette(mat.define-palette(mat.$indigo-palette),);
+//$my-back-darker: mat.get-color-from-palette(mat.define-palette(mat.$indigo-palette), 600);
+//$my-back-light: mat.get-color-from-palette(mat.define-palette(mat.$indigo-palette), 100);
+//$my-palette: mat.define-palette(mat.$indigo-palette);
+//.bgbtn {
+//  color: $my-back-light;
+//}
+
+.icon-wrapper {
+  border-radius: 1em;
+  position: relative;
+  //background-color: $my-back;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &:hover {
+  }
+
+  button {
+    * {
+      font-size: 1.5em;
+
+    }
+
+    &:hover {
+      //background-color: $my-back-darker;
+
+    }
+  }
+}
+
+.ids {
+  position: relative;
+  right: 200px;
+  top: -38px;
+  background-color: lightblue;
+
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  ul {
+    width: 100px;
+    left: 60px;
+    top: -20px;
+    height: auto;
+    background-color: lightblue;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    li {
+      padding: 3px;
+      list-style-type: none;
+      border-bottom: cornflowerblue 2px solid;
+    }
+  }
+}
