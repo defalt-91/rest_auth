@@ -1,80 +1,63 @@
-import {NgModule} from "@angular/core";
-import {BrowserModule} from "@angular/platform-browser";
-import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {StoreDevtoolsModule} from "@ngrx/store-devtools";
-
-import {AppRoutingModule} from "./app-routing.module";
-import {AppComponent} from "./app.component";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {LayoutModule} from "@angular/cdk/layout";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatButtonModule} from "@angular/material/button";
-import {MatSidenavModule} from "@angular/material/sidenav";
-import {MatIconModule} from "@angular/material/icon";
-import {MatListModule} from "@angular/material/list";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule, HttpClientXsrfModule} from "@angular/common/http";
-import {NavComponent} from "./components/nav/nav.component";
-import {StoreModule} from '@ngrx/store';
-import {MatInputModule} from "@angular/material/input";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatDividerModule} from "@angular/material/divider";
-import {environment} from "../environments/environment";
-import {EffectsModule} from "@ngrx/effects";
-// import {UserFeatureStoreModule} from "./store/UserFeatureStore/user-feature-store.module";
-import {HttpInterceptorProviders} from "./_shared";
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MyspinnerComponent} from './components/myspinner/myspinner.component';
-import {MatMenuModule} from '@angular/material/menu';
-import {SidebarComponent} from './components/sidebar/sidebar.component';
-import {metaReducers, reducers} from "./store";
-import {StoreRouterConnectingModule} from "@ngrx/router-store";
-import {ROUTER_STATE_SERIALIZER_PROVIDER} from "./_shared/custom-serializer";
+import { CdkAccordionModule }                     from "@angular/cdk/accordion";
+import { LayoutModule }                           from "@angular/cdk/layout";
+import { HttpClientModule, HttpClientXsrfModule } from "@angular/common/http";
+import { NgModule }                               from "@angular/core";
+import { FormsModule, ReactiveFormsModule }       from "@angular/forms";
+import { BrowserModule }                          from "@angular/platform-browser";
+import { BrowserAnimationsModule }                from "@angular/platform-browser/animations";
+import { EffectsModule }                          from "@ngrx/effects";
+import { StoreRouterConnectingModule }            from "@ngrx/router-store";
+import { StoreModule }                            from '@ngrx/store';
+import { StoreDevtoolsModule }                    from "@ngrx/store-devtools";
+import { MaterialModule }                         from "src/app/material.module";
+import { environment }                            from "../environments/environment";
+import { HttpInterceptorProviders }               from "./_shared";
+import { ROUTER_STATE_SERIALIZER_PROVIDER }       from "./_shared/custom-serializer";
+import { AppRoutingModule }                       from "./app-routing.module";
+import { AppComponent }                           from "./app.component";
+import { CarouselComponent }                      from './components/carousel/carousel.component';
+import { LoaderComponent }                        from './components/loader/loader.component';
+import { MyspinnerComponent }                     from './components/myspinner/myspinner.component';
+import { SidebarComponent }                       from './components/sidebar/sidebar.component';
+import { metaReducers, reducers }                 from "./store";
+import { UiEffects }                              from './store/ui/ui.effects';
+import { UserFeatureStoreModule }                 from "./store/UserFeatureStore/user-feature-store.module";
 // import {UserEffects} from "./store/UserFeatureStore/effects/user-feature-store.effects";
-import {UserFeatureStoreModule} from "./store/UserFeatureStore/user-feature-store.module";
-import { LoaderComponent } from './components/loader/loader.component';
-import { CarouselComponent } from './components/carousel/carousel.component';
+// import {UserFeatureStoreModule} from "./store/UserFeatureStore/user-feature-store.module";
 
-@NgModule({
-  declarations: [AppComponent,
-    NavComponent, MyspinnerComponent,
-    SidebarComponent, LoaderComponent, CarouselComponent,
-    ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    HttpClientXsrfModule.withOptions({
-      cookieName: "csrftoken",
-      headerName: "CSRFTOKEN",
-    }),
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatInputModule,
-    MatDividerModule,
-    MatSnackBarModule,
-    MatMenuModule,
-    MatProgressSpinnerModule,
-    UserFeatureStoreModule,
-    AppRoutingModule,
-    StoreModule.forRoot(reducers, {metaReducers}),
-    EffectsModule.forRoot(),
-    !environment.production ? StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}) : [],
-    StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
-  ],
+// import { RouterEffects } from './store/router.effects';
 
-  providers: [
-    HttpInterceptorProviders,
-    ROUTER_STATE_SERIALIZER_PROVIDER,
-  ],
-  bootstrap: [AppComponent],
-})
-export class AppModule {
-}
+@NgModule(
+	{
+		declarations: [
+			AppComponent,
+			MyspinnerComponent,
+			SidebarComponent,
+			LoaderComponent,
+			CarouselComponent,
+		],
+		imports     : [
+			BrowserModule,
+			BrowserAnimationsModule,
+			HttpClientModule,
+			HttpClientXsrfModule.withOptions({ cookieName: "csrftoken", headerName: "X-CSRFTOKEN", }),
+			FormsModule,
+			ReactiveFormsModule,
+			LayoutModule,
+			MaterialModule,
+			UserFeatureStoreModule,
+			AppRoutingModule,
+			StoreModule.forRoot(reducers, { metaReducers }),
+			EffectsModule.forRoot([UiEffects]),
+			!environment.production ? StoreDevtoolsModule.instrument(
+				{ maxAge: 25, logOnly: environment.production }) : [],
+			StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
+			CdkAccordionModule,
+		],
+		providers   : [
+			HttpInterceptorProviders,
+			ROUTER_STATE_SERIALIZER_PROVIDER,
+		],
+		bootstrap   : [AppComponent],
+	})
+export class AppModule{}

@@ -1,21 +1,18 @@
-import {ActionReducerMap, MetaReducer,} from '@ngrx/store';
-import {environment} from '../../environments/environment';
-import {routerReducer, RouterState} from "@ngrx/router-store";
-import {storeFreeze} from 'ngrx-store-freeze';
-import {UserState} from "./UserFeatureStore/reducers/user-feature-store.reducer";
-// import {userFeatureKey, userReducer} from "./UserFeatureStore/reducers/user-feature-store.reducer";
+import { routerReducer, RouterState }    from "@ngrx/router-store";
+import { ActionReducerMap, MetaReducer } from '@ngrx/store';
+import { storeFreeze }                   from 'ngrx-store-freeze';
+import * as fromUI                       from "src/app/store/ui/ui.reducer";
+import { environment }                   from 'src/environments/environment';
 
-export interface AppState {
-  // router:RouterState;
-  // user:UserState
+// import {userFeatureKey, userReducer} from "./UserFeatureStore/reducers/user-feature-store.reducer";
+export interface AppState{
+	router: RouterState;
+	ui: fromUI.State;
 }
 
-export const reducers: ActionReducerMap<AppState> =
-  {
-    router: routerReducer,
-    // user: userReducer,
-  }
+export const reducers: ActionReducerMap<AppState> = {
+	router: routerReducer,
+	ui    : fromUI.reducer
+};
 
-export const metaReducers: MetaReducer<AppState>[] =
-  !environment.production ? [storeFreeze] : [];
-
+export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [storeFreeze] : [];

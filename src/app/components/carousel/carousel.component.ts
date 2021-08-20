@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject }           from "rxjs";
 
 @Component({
   selector: 'app-carousel',
@@ -11,5 +12,4 @@ export class CarouselComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

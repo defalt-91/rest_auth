@@ -1,28 +1,28 @@
-import {createAction, props} from '@ngrx/store';
-import {LoginForm} from '../../../_models/login-form';
-import {ACCESS} from '../../../_models/access';
-import {USER} from '../../../_models/users';
-import {LoginUser} from '../../../_models/user';
+import { createAction, props } from '@ngrx/store';
+import { ACCESS }              from 'src/app/_models/access';
+import { LoginForm }           from 'src/app/_models/login-form';
+import { LoginUser }           from 'src/app/_models/user';
+import { USER }                from 'src/app/_models/users';
 
-enum Auth {
-  getUser = '[App] GetUser Success',
-  getUserSuccess = '[App] GetUser Success',
-  getUserFailure = '[App] GetUser Failure',
-  userLogin = '[User] Login',
-  userLoginSuccess = '[User] Login Success',
-  userLoginFailure = '[User] Login Failure',
-  userLogout = '[User] Logout',
-  userLogoutSuccess = '[User] Logout Success',
-  userLogoutFailure = '[User] Logout Failure',
-  userAccess = '[App] Refresh AccessT',
-  userAccessSuccess = '[App] Refresh AccessT Success',
-  userAccessFailure = '[App] Refresh AccessT Failure',
-  userAccessVerify = '[App] Verify AccessT',
-  userAccessVerifySuccess = '[App] Verify AccessT Success',
-  userAccessVerifyFailure = '[App] Verify AccessT Failure',
-  clearStore = '[initialState] Reset state',
+
+enum Auth{
+	getUser                 = '[App] GetUser Success',
+	getUserSuccess          = '[App] GetUser Success',
+	getUserFailure          = '[App] GetUser Failure',
+	userLogin               = '[User] Login',
+	userLoginSuccess        = '[User] Login Success',
+	userLoginFailure        = '[User] Login Failure',
+	userLogout              = '[User] Logout',
+	userLogoutSuccess       = '[User] Logout Success',
+	userLogoutFailure       = '[User] Logout Failure',
+	userAccess              = '[App] Refresh AccessT',
+	userAccessSuccess       = '[App] Refresh AccessT Success',
+	userAccessFailure       = '[App] Refresh AccessT Failure',
+	userAccessVerify        = '[App] Verify AccessT',
+	userAccessVerifySuccess = '[App] Verify AccessT Success',
+	userAccessVerifyFailure = '[App] Verify AccessT Failure',
+	clearStore              = '[initialState] Reset state',
 }
-
 
 export const getUser = createAction(Auth.getUser);
 export const getUserSuccess = createAction(Auth.getUserSuccess, props<{ data: USER }>());

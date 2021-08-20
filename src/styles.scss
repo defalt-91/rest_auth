@@ -6,46 +6,43 @@
 @include mat.core();
 
 //Light theme
-$light-primary: mat.define-palette(mat.$indigo-palette);
-$light-accent: mat.define-palette(mat.$pink-palette);
-$light-warn: mat.define-palette(mat.$yellow-palette);
+$light-primary: mat.define-palette(mat.$indigo-palette, 500, 100, 900);
+$light-accent: mat.define-palette(mat.$pink-palette, 500, 100, 900);
+$light-warn: mat.define-palette(mat.$red-palette);
 
 //My theme
 $my-theme: mat.define-light-theme(
-    (color: (primary: $light-primary, accent: $light-accent, warn: $light-warn,),));
+                (color: (primary: $light-primary, accent: $light-accent, warn: $light-warn,),));
 
 //Dark theme
-$dark-primary :  mat.define-palette(mat.$blue-grey-palette);
-$dark-accent  :  mat.define-palette(mat.$deep-orange-palette, A100);
-$dark-warn    :  mat.define-palette(mat.$teal-palette);
-$dark-theme   :  mat.define-dark-theme((
-  color: (primary: $dark-primary, accent: $dark-accent, warn: $dark-warn,),
-  typography:mat.define-typography-config(
-  $font-family:serif,
-  )
+$dark-primary: mat.define-palette(mat.$blue-grey-palette);
+$dark-accent: mat.define-palette(mat.$deep-orange-palette, A100);
+$dark-warn: mat.define-palette(mat.$red-palette,700);
+$dark-theme: mat.define-dark-theme((
+        color: (primary: $dark-primary, accent: $dark-accent, warn: $dark-warn,),
+        typography:mat.define-typography-config(
+                $font-family: serif,
+        )
 ));
 
 //my Theme Colors
-$colorConf:mat.get-color-config($my-theme);
+$colorConf: mat.get-color-config($my-theme);
 $primary-palette: map.get($colorConf, 'primary');
-$accent-palette:  map.get($colorConf, 'accent');
-$warn-palette:    map.get($colorConf, 'warn');
-$is-dark-theme:   map.get($colorConf, 'is-dark');
+$accent-palette: map.get($colorConf, 'accent');
+$warn-palette: map.get($colorConf, 'warn');
+$background: map.get($colorConf, background);
+$foreground: map.get($colorConf, foreground);
+$backgrounds: map.get($foreground, base);
+$lkj: mat.get-color-from-palette($foreground, divider);
+$is-dark-theme: map.get($colorConf, 'is-dark');
 
 //Typography Config
 $typography-config: mat.get-typography-config($my-theme);
 //$my-font-family: mat.font-family($typography-config);
 
 //My map of colors
-$primary-light:mat.get-color-from-palette($primary-palette,100);
-$primary-dark:mat.get-color-from-palette($primary-palette,700);
-
-$asdd:mat.get-color-config($my-theme);
-$fd:map.get($asdd,primary);
-$colorss:mat.get-color-from-palette($fd,100);
-.foo-button{
-  background-color: $colorss;
-}
+$primary-light: mat.get-color-from-palette($primary-palette, 100);
+$primary-dark: mat.get-color-from-palette($primary-palette, 700);
 
 //Specific componenets theme 'as color as typography'
 @include mat.core-theme($my-theme);
@@ -109,17 +106,18 @@ body {
 
 body {
   margin: 0;
+
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 $my-back: mat.get-color-from-palette(mat.define-palette(mat.$indigo-palette));
 $my-back-darker: mat.get-color-from-palette(
-    mat.define-palette(mat.$indigo-palette),
-    600
+                mat.define-palette(mat.$indigo-palette),
+                600
 );
 $my-back-light: mat.get-color-from-palette(
-    mat.define-palette(mat.$indigo-palette),
-    100
+                mat.define-palette(mat.$indigo-palette),
+                100
 );
 $my-palette: mat.define-palette(mat.$indigo-palette);
 //@include mat.strong-focus-indicators((
@@ -128,7 +126,7 @@ $my-palette: mat.define-palette(mat.$indigo-palette);
 //  border-radius: 12px,
 //));
 //@include mat.strong-focus-indicators-theme($dark-theme);
-$my-palette: mat.define-palette(mat.$indigo-palette);
+
 .my-custom-style {
   background: mat.get-color-from-palette($my-palette, 900);
   color: mat.get-color-from-palette($my-palette, 500 -contrast);
@@ -149,15 +147,29 @@ $my-palette: mat.define-palette(mat.$indigo-palette);
   background-color: mat.get-color-from-palette($light-primary, 600);
 }
 
-.btn:hover {
-  color: mat.get-color-from-palette($light-primary, darker-contrast);
-  background-color: mat.get-color-from-palette($light-primary, 300);
-  transform: scale(1.05);
-  z-index: 1;
-}
+//.mat-button:hover {
+//  color: mat.get-color-from-palette($light-primary, darker-contrast);
+//  background-color: mat.get-color-from-palette($light-primary, 300);
+//  transform: scale(1.05);
+//  z-index: 1;
+//}
 
 //$kids-typography: mat.define-typography-config(
 //  // Specify "Comic Sans" as the default font family for all levels.
 //  $font-family: 'Comic Sans',
 //);
 @include carousel.theme($my-theme);
+
+// .mat-button-focus-overlay {
+//  background-color: darkslateblue;
+//   overflow: visible;
+//   opacity: 1;
+//}
+.mat-button-focus-overlay {
+    background: map.get($foreground, text);
+    //background: map.get($background, status-bar);
+  }
+//.mat-icon-button:hover {
+//   background-color: mat.color($background, hover);
+// }
+//    @include mat.button-theme.theme($theme-or-color-config);
