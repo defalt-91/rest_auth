@@ -7,73 +7,74 @@ import { AuthService }                                  from 'src/app/_services/
 
 import {
 	getUser, getUserFailure, getUserSuccess, userAccess, userAccessFailure, userAccessSuccess, userAccessVerify,
-	userAccessVerifyFailure, userLogin, userLoginFailure, userLoginSuccess,
+	userAccessVerifyFailure, userAccessVerifySuccess, userLogin, userLoginFailure, userLoginSuccess
 } from '../actions/user-feature-store.actions';
 
 
 @Injectable()
 export class UserEffects implements OnInitEffects{
 	
-	logUser$ = createEffect(
+	logUser$           = createEffect(
 		() => this.actions$.pipe(
 			ofType(userLogin),
-			exhaustMap((action) =>
-				this.authService.login(
-					    {
-						    username: action.formValue.username,
-						    password: action.formValue.password,
-					    }
-				    )
-				    .pipe(
-					    map((data) => userLoginSuccess({ data })),
-					    catchError((error) => of(userLoginFailure({ error })))
-				    )
+			exhaustMap(
+				(action) => this.authService.login({ ...action.formValue }).pipe(
+					map((data) => userLoginSuccess({ data })),
+					catchError((error) => of(userLoginFailure({ error })))
+				)
 			)
 		)
 		// { dispatch: false }
 	);
 	GetNewAccessToken$ = createEffect(
-		() =>
-			this.actions$.pipe(
-				ofType(userAccess),
-				exhaustMap((action) =>
-					this.authService.getNewAccess().pipe(
-						map((data) => userAccessSuccess({ data })),
-						catchError((error) => of(userAccessFailure({ error })))
-					)
+		() => this.actions$.pipe(
+			ofType(userAccess),
+			exhaustMap(
+				(action) => this.authService.getNewAccess().pipe(
+					map((data) => userAccessSuccess({ data })),
+					catchError((error) => of(userAccessFailure({ error })))
 				)
 			)
+		)
 		// { dispatch: false }
 	);
-	CheckAccessT$ = createEffect(
+	CheckAccessT$      = createEffect(
 		() => this.actions$.pipe(
 			ofType(userAccessVerify),
-			exhaustMap(() =>
-				this.authService.getAccessChecked().pipe(
+			// map(() => userAccess()),
+			exhaustMap(
+				() => this.authService.getAccessChecked().pipe(
 					// tap(()=>userAccess()),
-					map(() => userAccess()),
+					map((data) => userAccessVerifySuccess({ data })),
 					catchError((error) => of(userAccessVerifyFailure({ error })))
 				)
 			)
 		)
 		// { dispatch: false }
 	);
-	loadUser$ = createEffect(() =>
-		this.actions$.pipe(
+	CheckAccessT2$     = createEffect(
+		() => this.actions$.pipe(
+			ofType(userAccessVerifySuccess),
+			map(() => userAccess())
+		)
+	);
+	
+	loadUser$           = createEffect(
+		() => this.actions$.pipe(
 			ofType(getUser),
-			exhaustMap(() =>
-				this.authService.getUser().pipe(
+			exhaustMap(
+				() => this.authService.getUser().pipe(
 					map((data) => getUserSuccess({ data })),
 					catchError((error) => of(getUserFailure({ error })))
 				)
 			)
 		)
 	);
-	loadUserFromEffect$ = createEffect(() =>
-		this.actions$.pipe(
+	loadUserFromEffect$ = createEffect(
+		() => this.actions$.pipe(
 			ofType(userAccessSuccess),
-			exhaustMap(() =>
-				this.authService.getUser().pipe(
+			exhaustMap(
+				() => this.authService.getUser().pipe(
 					map((data) => getUserSuccess({ data })),
 					catchError((error) => of(getUserFailure({ error })))
 				)

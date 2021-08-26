@@ -1,4 +1,4 @@
-<div id="rightBar">
+<div id="rightBar" [class]="{light:!(isDark|async),dark:isDark|async}">
     <button mat-icon-button
             [matMenuTriggerFor]="menu">
         <mat-icon>computer</mat-icon>

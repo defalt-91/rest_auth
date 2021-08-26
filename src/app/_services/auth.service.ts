@@ -5,22 +5,23 @@ import { Router }                 from '@angular/router';
 import { Store }                  from '@ngrx/store';
 import { Observable, throwError } from 'rxjs';
 import { shareReplay, tap }       from 'rxjs/operators';
-import { ACCESS }                 from '../_models/access';
+import { ACCESS, VERIFY }         from '../_models/access';
 import { LoginForm }              from '../_models/login-form';
 import { LoginUser }              from '../_models/user';
 import { USER }                   from '../_models/users';
 import { userLogout }             from '../store/UserFeatureStore/actions/user-feature-store.actions';
 import {
-	select_access_token, select_access_token_expiration,
+	RefreshTokenExp, select_access_token, select_access_token_expiration
 }                                 from '../store/UserFeatureStore/selectors/user-feature-store.selectors';
 
 
 @Injectable({ providedIn: 'root' })
 export class AuthService{
 	currentUser = {};
-	endpoint = 'http://localhost:8000/auth';
+	endpoint    = 'http://localhost:8000/auth';
 	Access?: string;
-	AccessExpiration?: string ;
+	AccessExpiration?: string;
+	RefreshExpiration?: string;
 	
 	constructor(
 		private store: Store,
@@ -32,10 +33,11 @@ export class AuthService{
 		this.store
 		    .select(select_access_token_expiration)
 		    .subscribe((x) => (this.AccessExpiration = x));
+		this.store.select(RefreshTokenExp).subscribe(x => this.RefreshExpiration = x);
 	}
 	
 	getAccessChecked() {
-		return this.http.post(`${ this.endpoint }/token/verify/`, {});
+		return this.http.post<VERIFY>(`${ this.endpoint }/token/verify/`, {});
 	}
 	
 	getNewAccess(): Observable<ACCESS> {
@@ -68,8 +70,7 @@ export class AuthService{
 	public isLoggedIn(): boolean {
 		if(this.AccessExpiration && this.Access){
 			return new Date(this.AccessExpiration) > new Date()
-				? true
-				: this.getNewAccess() && this.isLoggedIn();
+			
 		} else{
 			try{
 				// this.getNewAccess();

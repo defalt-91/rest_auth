@@ -1,12 +1,11 @@
-import { animate, state, style, transition, trigger } from "@angular/animations";
-import { Component }                                  from '@angular/core';
-import { FormBuilder, FormGroup, Validators }         from '@angular/forms';
-import { ActivatedRoute }                             from '@angular/router';
-import { Store }                                      from '@ngrx/store';
-import { InputSlide }                                 from "src/app/animations";
-import { AppState }                                   from "src/app/store";
-import { LoginForm }                                  from '../../_models/login-form';
-import { userLogin }                                  from '../../store/UserFeatureStore/actions/user-feature-store.actions';
+import { Component }                          from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute }                     from '@angular/router';
+import { Store }                              from '@ngrx/store';
+import { InputSlide }                         from "src/app/animations";
+import { AppState }                           from "src/app/store";
+import { LoginForm }                          from '../../_models/login-form';
+import { userLogin }                          from '../../store/UserFeatureStore/actions/user-feature-store.actions';
 
 
 @Component(
@@ -32,7 +31,8 @@ export class LoginComponent{
 				username: ['', [Validators.required, Validators.minLength(4)]],
 				password: ['', [Validators.required, Validators.minLength(7)]],
 				
-			})
+			}
+		)
 	}
 	
 	get username() {return this.form.get('username')!;}

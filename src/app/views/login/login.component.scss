@@ -10,7 +10,15 @@
   box-shadow: 0 4px 4px 0 rgba(110, 120, 120, 0.7);
   border: none;
 }
-
+//.animationA{
+//  display: inline-block;
+//  width: 120px;
+//  transition: all 0.1s ease-out;
+//  &:active{
+//    transform: scale(1.2);
+//    border: 3px solid red;
+//  }
+//}
 .wrapper:hover {
   border: 1px solid hsla(12, 60%, 65%, 0.6);
   box-shadow: none;

@@ -2,6 +2,10 @@ export interface ACCESS {
     access?: string;
     access_token_expiration?: string;
 }
+export interface VERIFY{
+        refresh_token_expiration?: string;
+
+}
 // export default interface User {
 //   access_token: string;
 //   refresh_token: string;

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ACCESS }              from 'src/app/_models/access';
+import { ACCESS, VERIFY }      from 'src/app/_models/access';
 import { LoginForm }           from 'src/app/_models/login-form';
 import { LoginUser }           from 'src/app/_models/user';
 import { USER }                from 'src/app/_models/users';
@@ -41,7 +41,7 @@ export const userAccessSuccess = createAction(Auth.userAccessSuccess, props<{ da
 export const userAccessFailure = createAction(Auth.userAccessFailure, props<{ error: any }>());
 
 export const userAccessVerify = createAction(Auth.userAccessVerify);
-export const userAccessVerifySuccess = createAction(Auth.userAccessVerifySuccess);
+export const userAccessVerifySuccess = createAction(Auth.userAccessVerifySuccess,props<{data:VERIFY}>());
 export const userAccessVerifyFailure = createAction(Auth.userAccessVerifyFailure, props<{ error: any }>());
 
 export const clearStore = createAction(Auth.clearStore);

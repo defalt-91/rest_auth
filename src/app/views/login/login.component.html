@@ -1,6 +1,7 @@
 <div class="wrapper">
     <form [formGroup]="form" (ngSubmit)="login()" class="form">
         <h2>Address</h2>
+        <button class="animationA"> click me</button>
         <mat-form-field appearance="outline" [@inputP]="username.value.length===0?'nist':'hast'">
             <mat-label for="username">Username:</mat-label>
             <input

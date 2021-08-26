@@ -13,21 +13,12 @@
                             Routes
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <a routerLink="/" mat-list-item>
-                        <mat-icon color="accent">cake</mat-icon>
-                        home</a>
+                    <a routerLink="/" mat-list-item><mat-icon color="accent">cake</mat-icon>home</a>
                     <a routerLink="/" mat-list-item>home</a>
-                    <a mat-list-item routerLink="/post/list" routerLinkActive="active"> notfound |</a>
-                    <mat-nav-list cdkAccordion>
-                        <a mat-list-item (click)="item.toggle()" (animationstart)="item.expanded"
-                           (animationend)="!item.expanded">salam</a>
-                        <a mat-list-item [style.display]="item.expanded?'':'none'" cdkAccordionItem
-                           #item='cdkAccordionItem'>Aalamsalamsalam</a>
-                    </mat-nav-list>
-                    <a mat-list-item routerLink="/post/detail" routerLinkActive="active"> detail |</a>
-                    <a mat-list-item routerLink="/post/create" routerLinkActive="active"> create |</a>
+                    <a mat-list-item routerLink="/post/list" routerLinkActive="active"> notfound </a>
+                    <a mat-list-item routerLink="/post/detail" routerLinkActive="active"> detail </a>
+                    <a mat-list-item routerLink="/post/create" routerLinkActive="active"> create </a>
                     <a mat-list-item routerLink="/login" routerLinkActive="active"> login</a>
-
                 </mat-expansion-panel>
             </mat-accordion>
         </mat-nav-list>
@@ -52,27 +43,24 @@
                 <div></div>
             </div>
             <div class="btn-group">
-                <button mat-button (click)="DarkTheme()">
+                <button mat-button (click)="ChangeTheme()">
                     <mat-icon>palette</mat-icon>
                 </button>
-                <button (click)="logout()" routerLink="logout" mat-stroked-button id="logout">
+                <button (click)="logout()" mat-raised-button color="primary">
                     <mat-icon>logout</mat-icon>
                     <span>logout</span>
                 </button>
                 <a mat-button>angular</a>
             </div>
         </mat-toolbar>
-        <mat-progress-bar mode="indeterminate">
+
+        <mat-progress-bar mode="indeterminate" *ngIf="loading$ | async">
             <!-- *ngIf="loading$ | async" -->
         </mat-progress-bar>
         <div id="app-nav" [@routeAnimation]="getAnimationData(routerOutlet)">
-            <h1>{{ user$ | async }}</h1>
-            <button (click)="logout2()" mat-stroked-button>logout</button>
             <router-outlet #routerOutlet="outlet"></router-outlet>
-            <app-carousel></app-carousel>
         </div>
         <app-sidebar></app-sidebar>
-        <app-loader></app-loader>
     </mat-sidenav-content>
-
+    <app-loader *ngIf="loading$ | async"></app-loader>
 </mat-sidenav-container>

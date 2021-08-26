@@ -29,40 +29,45 @@ export const initialState: State = {
 
 export const userReducer = createReducer(
 	initialState,
+	
 	on(UserActions.userAccessVerify, state => state),
-	on(UserActions.userAccessVerifySuccess, (state, action) => state),
-	on(UserActions.userAccessVerifyFailure, (state, action) => state),
-	
-	on(UserActions.getUser, state => state),
-	on(UserActions.getUserSuccess, (state, action) => ({ ...state, ...action.data })),
-	on(UserActions.getUserFailure, state => state),
-	
-	on(UserActions.clearStore, (state) => ({ ...initialState })),
+	on(
+		UserActions.userAccessVerifySuccess,
+		(state, { data }) => ({ ...state, refresh_token_expiration: data.refresh_token_expiration })
+	),
+	on(UserActions.userAccessVerifyFailure, (state) => state),
 	
 	on(UserActions.userAccess, state => state),
 	on(UserActions.userAccessSuccess, (state, { data }) => ({
 		...state,
 		access_token           : data.access,
-		access_token_expiration: data.access_token_expiration
+		access_token_expiration: data.access_token_expiration,
+		IsAuthenticated        : true
 	})),
-	on(UserActions.userAccessFailure, (state, action) => state),
-	on(UserActions.userLogout, state => initialState),
+	on(UserActions.userAccessFailure, (state) => state),
+	on(UserActions.getUser, state => state),
+	on(UserActions.getUserSuccess, (state, action) => ({ ...state, ...action.data })),
+	on(UserActions.getUserFailure, state => state),
+	
+	on(UserActions.clearStore, () => ({ ...initialState })),
+	
+	on(UserActions.userLogout, (state) => initialState),
 	// on(UserActions.userLogoutSuccess,state  =>  state),
 	// on(UserActions.userLogoutFailure,state  =>  state),
 	on(UserActions.userLogin, state => state),
-	on(UserActions.userLoginFailure, (state, action) => state),
+	on(UserActions.userLoginFailure, (state) => state),
 	on(UserActions.userLoginSuccess, (state, action) => ({
-			...state,
-			// ...action.data
-			IsAuthenticated         : true,
-			access_token            : action.data.access_token,
-			access_token_expiration : action.data.access_token_expiration,
-			refresh_token_expiration: action.data.refresh_token_expiration,
-			pk                      : action.data.user.pk,
-			username                : action.data.user.username,
-			email                   : action.data.user.email,
-			last_name               : action.data.user.last_name,
-			first_name              : action.data.user.first_name
-		})
+		   ...state,
+		   // ...action.data
+		   IsAuthenticated         : true,
+		   access_token            : action.data.access_token,
+		   access_token_expiration : action.data.access_token_expiration,
+		   refresh_token_expiration: action.data.refresh_token_expiration,
+		   pk                      : action.data.user.pk,
+		   username                : action.data.user.username,
+		   email                   : action.data.user.email,
+		   last_name               : action.data.user.last_name,
+		   first_name              : action.data.user.first_name
+	   })
 	)
 );

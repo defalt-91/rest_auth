@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Store }             from "@ngrx/store";
-import { selectLoading }     from "src/app/store/ui/ui.reducer";
+import { Component }     from '@angular/core';
+import { Store }         from "@ngrx/store";
+import { AppState }      from "src/app/store";
+import { selectLoading } from "src/app/store/ui/ui.reducer";
 
 
 @Component({
@@ -10,6 +11,7 @@ import { selectLoading }     from "src/app/store/ui/ui.reducer";
            })
 export class LoaderComponent{
 	loading$ = this.store.select(selectLoading);
-	constructor(private store: Store) { }
-
+	
+	constructor(private store: Store<AppState>) { }
+	
 }

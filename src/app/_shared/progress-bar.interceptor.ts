@@ -6,12 +6,12 @@ import {
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { finalize } from "rxjs/operators";
-import { ProgressService } from "../_services/progressbar.service";
+import { finalize }  from "rxjs/operators";
+import { UIService } from "src/app/_services/ui.service";
 
 @Injectable()
 export class ProgressBarInterceptor implements HttpInterceptor {
-	constructor(public progressService: ProgressService) {}
+	constructor(public progressService: UIService) {}
 
 	intercept(
 		request: HttpRequest<any>,

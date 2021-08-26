@@ -20,3 +20,4 @@ export const isLoggedOut = createSelector(
 	loggedIn => !loggedIn
 );
 export const usernameSelector = createSelector(selectUserState, state => state.username);
+export const RefreshTokenExp=createSelector(selectUserState,state=>state.refresh_token_expiration);

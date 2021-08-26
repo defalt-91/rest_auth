@@ -9,6 +9,6 @@ import { userFeatureKey, userReducer } from './reducers/user-feature-store.reduc
 	imports: [
 		StoreModule.forFeature(userFeatureKey, userReducer),
 		EffectsModule.forFeature([UserEffects]),
-	],
+	],exports:[StoreModule,EffectsModule]
 })
 export class UserFeatureStoreModule{}
