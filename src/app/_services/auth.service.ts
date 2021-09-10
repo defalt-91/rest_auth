@@ -13,12 +13,13 @@ import { userLogout }             from '../store/UserFeatureStore/actions/user-f
 import {
 	RefreshTokenExp, select_access_token, select_access_token_expiration
 }                                 from '../store/UserFeatureStore/selectors/user-feature-store.selectors';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
 export class AuthService{
 	currentUser = {};
-	endpoint    = 'http://localhost:8000/auth';
+	endpoint    = `${environment.api_url}/auth`;
 	Access?: string;
 	AccessExpiration?: string;
 	RefreshExpiration?: string;
