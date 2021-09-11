@@ -1,0 +1,48 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+                 [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                 [mode]="(isHandset$ | async) ? 'side' : 'over'"
+                 [opened]="(isHandset$ | async)">
+        <mat-toolbar>Menu</mat-toolbar>
+        <mat-nav-list>
+            <mat-accordion togglePosition="after" multi="false">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>Routes</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <a routerLink="/" mat-list-item><mat-icon color="accent">cake</mat-icon>home</a>
+                    <a routerLink="/" mat-list-item>home</a>
+                    <a mat-list-item routerLink="/post/list" routerLinkActive="active"> notfound </a>
+                    <a mat-list-item routerLink="/post/detail" routerLinkActive="active"> detail </a>
+                    <a mat-list-item routerLink="/post/create" routerLinkActive="active"> create </a>
+                    <a mat-list-item routerLink="/login" routerLinkActive="active"> login</a>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary" [style.]="{}" class="toolbar">
+            <div><button type="button" aria-label="Toggle sidenav" mat-icon-button
+                         (click)="drawer.toggle()">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon></button>
+                <span>Welcome</span></div>
+            <app-ellipsis *ngIf="spin"></app-ellipsis>
+            <div class="btn-group">
+                <button mat-button (click)="ChangeTheme()"><mat-icon>palette</mat-icon></button>
+                <button (click)="logout()" mat-raised-button color="primary">
+                    <mat-icon>logout</mat-icon>
+                    <span>logout</span>
+                </button>
+                <a mat-button>angular</a>
+            </div>
+        </mat-toolbar>
+        <mat-progress-bar mode="indeterminate" *ngIf="loading$ | async">
+            <!-- *ngIf="loading$ | async" -->
+        </mat-progress-bar>
+        <div id="app-nav" [@routeAnimation]="getAnimationData(routerOutlet)">
+            <router-outlet #routerOutlet="outlet"></router-outlet>
+        </div>
+        <app-sidebar></app-sidebar>
+    </mat-sidenav-content>
+    <app-loader *ngIf="loading$ | async"></app-loader>
+</mat-sidenav-container>

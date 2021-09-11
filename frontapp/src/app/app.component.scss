@@ -1,0 +1,59 @@
+@use '~@angular/material' as mat;
+:host {position: inherit;}
+.example-button {margin-top: 16px;}
+@mixin arman {background-color: #0078cf;}
+.example-tooltip-red {background: #b71c1c;}
+
+button {
+  //@include mat.elevation-transition();
+  //@include button-base.base;
+  //background-color: $primary-light;
+  &:hover {
+  //@include mat.elevation(1);
+  @include mat.ripple();
+    //@include mat.elevation(7)
+  }
+}
+mat-sidenav-content {
+  display: grid;
+  overflow: visible;
+  grid-template-columns:auto 3rem;
+  grid-template-rows:auto auto 100%;
+  grid-template-areas:
+          'header header'
+          'progressBar progressBar'
+          'main right'
+}
+mat-toolbar {
+  grid-area: header;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns:repeat(3, 1fr);
+  justify-content: space-around;
+}
+mat-progress-bar {
+  grid-area: progressBar;
+}
+#app-nav {
+  grid-area: main;
+  justify-content: center;
+  align-items: center;
+}
+app-sidebar {
+  grid-area: right;
+}
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  .btn-group {
+    .spn {
+      display: flex;
+
+      :nth-child(1) {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
+  }
+}
