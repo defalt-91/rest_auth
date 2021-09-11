@@ -22,6 +22,7 @@ import { SidebarComponent }                       from './components/sidebar/sid
 import { metaReducers, reducers }                 from "./store";
 import { UiEffects }                              from './store/ui/ui.effects';
 import { UserFeatureStoreModule }                 from "./store/UserFeatureStore/user-feature-store.module";
+import { EllipsisComponent } from './components/ellipsis/ellipsis.component';
 // import {UserEffects} from "./store/UserFeatureStore/effects/user-feature-store.effects";
 // import {UserFeatureStoreModule} from "./store/UserFeatureStore/user-feature-store.module";
 
@@ -35,6 +36,7 @@ import { UserFeatureStoreModule }                 from "./store/UserFeatureStore
 			SidebarComponent,
 			LoaderComponent,
 			CarouselComponent,
+   EllipsisComponent,
 		],
 		imports     : [
 			BrowserModule,

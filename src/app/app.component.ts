@@ -15,39 +15,33 @@ import { clearStore }                      from "./store/UserFeatureStore/action
 
 @Component(
 	{
-		selector   : "app-root",
-		templateUrl: "./app.component.html",
-		styleUrls  : ["./app.component.scss"],
-		animations : [slideInAnimation],
-		viewProviders:[Title]
+		selector     : "app-root",
+		templateUrl  : "./app.component.html",
+		styleUrls    : ["./app.component.scss"],
+		animations   : [slideInAnimation],
+		viewProviders: [Title]
 	})
 export class AppComponent{
 	Title                           = 'Frontend';
 	spin                            = false;
 	loading$                        = this.store.select(selectLoading);
-	isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Large)
-	                                      .pipe(map((result) => result.matches), shareReplay());
 	isDark$: Observable<boolean>    = this.store.select(selectDarkTheme);
+	// breakPoint
+	isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Large).pipe(
+		map((result) => result.matches),
+		shareReplay()
+	);
 	
 	constructor(
-		private title:Title,
+		private title: Title,
 		private router: Router,
 		private authService: AuthService,
 		private store: Store<AppState>,
 		private breakpointObserver: BreakpointObserver
 	) {title.setTitle(this.Title)}
 	
-	getAnimationData = (outlet: RouterOutlet) => (outlet?.activatedRouteData?.animation);
-	
-	logout() {this.authService.logout()}
-	
-	retttt() {this.store.dispatch(clearStore());}
-	
-	ChangeTheme() {this.store.dispatch(UI_Theme_Change())}
-	
-	logout2() {
-		this.spin = true;
-		this.authService.logout();
-		setTimeout(() => this.spin = false, 2200)
-	}
+	getAnimationData(outlet: RouterOutlet):string|undefined { return outlet?.activatedRouteData?.animation}
+	logout():void {this.authService.logout()}
+	retttt():void  {this.store.dispatch(clearStore());}
+	ChangeTheme():void  {this.store.dispatch(UI_Theme_Change())}
 }
