@@ -9,41 +9,45 @@ import { userLogin }                          from '../../store/UserFeatureStore
 
 
 @Component(
-	{
-		selector   : 'app-login',
-		templateUrl: './login.component.html',
-		styleUrls  : ['./login.component.scss'],
-		animations : [InputSlide]
-	})
-export class LoginComponent{
-	form: FormGroup;
-	isOpen      = false;
-	formAnimate = 'nist';
-	
-	constructor(
-		private route: ActivatedRoute,
-		// private snackBar: MatSnackBar,
-		private fb: FormBuilder,
-		private store: Store<AppState>,
-	) {
-		this.form = this.fb.group(
-			{
-				username: ['', [Validators.required, Validators.minLength(4)]],
-				password: ['', [Validators.required, Validators.minLength(7)]],
-				
-			}
-		)
-	}
-	
-	get username() {return this.form.get('username')!;}
-	
-	get password() {return this.form.controls.password;}
-	
-	login() {
-		const formValue: LoginForm = this.form.value;
-		if(formValue.username && formValue.password && this.form.valid){
-			this.store.dispatch(userLogin({ formValue }));
-		}
-	}
-	
+  {
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: [ './login.component.scss' ],
+    animations: [ InputSlide ]
+  } )
+export class LoginComponent {
+  form: FormGroup;
+  isOpen = false;
+  formAnimate = 'nist';
+
+  constructor(
+    private route: ActivatedRoute,
+    // private snackBar: MatSnackBar,
+    private fb: FormBuilder,
+    private store: Store<AppState>,
+  ) {
+    this.form = this.fb.group(
+      {
+        username: [ '', [ Validators.required, Validators.minLength( 4 ) ] ],
+        password: [ '', [ Validators.required, Validators.minLength( 7 ) ] ],
+
+      }
+    )
+  }
+
+  get username() {
+    return this.form.get( 'username' )!;
+  }
+
+  get password() {
+    return this.form.controls.password;
+  }
+
+  login() {
+    const formValue: LoginForm = this.form.value;
+    if ( formValue.username && formValue.password && this.form.valid ) {
+      this.store.dispatch( userLogin( { formValue } ) );
+    }
+  }
+
 }

@@ -5,11 +5,14 @@ services:
         container_name: proxy
         volumes:
             - ./nginx.conf:/etc/nginx/nginx.conf
+            - ./cert/localhost/localhost.crt:/etc/ssl/certs/nginx-selfsigned.crt
+            - ./cert/localhost/localhost.decrypted.key:/etc/ssl/private/nginx-selfsigned.key
         networks:
             -   frontend
             -   backend
         ports:
-            - "8008:8000"
+            - "443:443"
+            - "80:80"
         expose:
             - "8008"
         depends_on:
@@ -18,7 +21,8 @@ services:
         restart: on-failure
 
     python:
-        build: ./backend
+        image: python-django-pip-image
+        env_file: dev.env
         container_name: python
         command: gunicorn djrestauth.wsgi -b 0.0.0.0:81
         ports:
@@ -47,22 +51,22 @@ services:
         restart: on-failure
 
     db:
-        image: postgres:latest
+        image: postgres:alpine
         container_name: database
         volumes:
             -   dbData:/var/lib/postgresql/data
         environment:
-            -   POSTGRES_PASSWORD=mysecretpassword
-            -   POSTGRES_USER=defalt91
-            -   PGPASSWORD=mysecretpassword
-            -   POSTGRES_DB=djangoDB
-            -   POSTGRES_HOST_AUTH_METHOD="true"
-            -   PGDATA=/var/lib/postgresql/data
+            -   "POSTGRES_USER=SuperUesr"
+            -   "POSTGRES_PASSWORD=<<0012A96s21g39>>"
+            -   "POSTGRES_DB=postgres"
+            -   "PGPASSWORD=63A67s411g"
+            -   "PGDATA=/var/lib/postgresql/data"
         networks:
             -   hidden
         ports:
             - "5432"
-        restart: on-failure
+        expose:
+            - "5432"
 networks:
     frontend:
         driver: bridge
@@ -79,4 +83,4 @@ networks:
         internal: true
 volumes:
     dbData:
-        name: postgreSql
+        name: rest_authpsql_volume

@@ -1,5 +1,4 @@
 from pathlib import Path
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-7jr*e&za)o@s8$-_+a95s_!w6!$kh8b17j071*n)-)2e5-p2%1"
 DEBUG = True
@@ -51,12 +50,12 @@ TEMPLATES = [
 WSGI_APPLICATION = "djrestauth.wsgi.application"
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "SuperUesr",
-        "PASSWORD": "<<0012A96s21g39>>",
-        "HOST": "db",
-        "PORT": "5432",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "db.sqlite",
+        # "USER": "SuperUesr",
+        # "PASSWORD": "<<0012A96s21g39>>",
+        # "HOST": "db",
+        # "PORT": "5432",
     }
 }
 AUTH_PASSWORD_VALIDATORS = [
@@ -115,11 +114,11 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 CORS_ALLOW_CREDENTIALS = True
 REST_SESSION_LOGIN = 'False'
-SECURE_SSL_REDIRECT = True
-SECURE_HSTS_SECONDS = 2592000
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # new
+# SECURE_SSL_REDIRECT = True
+# SECURE_HSTS_SECONDS = 2592000
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # new
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  # new
