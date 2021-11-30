@@ -11,15 +11,6 @@
   border: none;
 }
 
-//.animationA{
-//  display: inline-block;
-//  width: 120px;
-//  transition: all 0.1s ease-out;
-//  &:active{
-//    transform: scale(1.2);
-//    border: 3px solid red;
-//  }
-//}
 .wrapper:hover {
   border: 1px solid hsla(12, 60%, 65%, 0.6);
   box-shadow: none;
@@ -51,16 +42,16 @@
   }
 }
 
-/* .ng-submitted {
+ .ng-submitted {
   background-color: white;
-} */
-/* .ng-valid[required], .ng-valid.required {
+}
+ .ng-valid[required], .ng-valid.required {
   border-left: 25px solid #42A948;
-} */
-/* .ng-invalid:not(form) {
-  border-left: 5px solid #a94442;
-} */
-/*
+}
+ .ng-invalid:not(form) {
+  border-left: 2px solid #a94442;
+}
+
 .alert div {
   background-color: #fed3d3;
   color: #820000;
@@ -80,4 +71,4 @@ label {
 select {
   width: 100%;
   padding: .5rem;
-} */
+}

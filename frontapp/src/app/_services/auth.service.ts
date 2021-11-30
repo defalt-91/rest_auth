@@ -53,7 +53,7 @@ export class AuthService{
 		// localStorage.clear()
 		return this.http.post<LoginUser>(`${ this.endpoint }/login/`, user).pipe(
 			tap((res) => {
-				this.snack.open('You are Loged In ', 'close', { duration: 3001 });
+				this.snack.open('You are Logged In ', 'close', { duration: 3001 });
 				// this.setSessionFromLogin(res)
 			}),
 			shareReplay()
