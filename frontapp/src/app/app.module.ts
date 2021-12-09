@@ -24,6 +24,8 @@ import { metaReducers, reducers }                 from "./store";
 import { UiEffects }                              from './store/ui/ui.effects';
 import { UserFeatureStoreModule }                 from "./store/UserFeatureStore/user-feature-store.module";
 import { EllipsisComponent }                      from './components/ellipsis/ellipsis.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 // import {UserEffects} from "./store/UserFeatureStore/effects/user-feature-store.effects";
 // import {UserFeatureStoreModule} from "./store/UserFeatureStore/user-feature-store.module";
 
@@ -57,6 +59,8 @@ import { EllipsisComponent }                      from './components/ellipsis/el
         { maxAge: 25, logOnly: environment.production } ) : [],
       StoreRouterConnectingModule.forRoot( { stateKey: 'router' } ),
       CdkAccordionModule,
+      MatInputModule,
+      MatButtonModule,
     ],
     providers: [
       HttpInterceptorProviders,

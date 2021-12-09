@@ -18,6 +18,7 @@ import { MatTooltipModule }         from "@angular/material/tooltip";
 import { MatTreeModule }  			from '@angular/material/tree';
 import { MatTableModule } 			from '@angular/material/table';
 import { MatPaginatorModule } 		from '@angular/material/paginator';
+import { MatRadioModule } from '@angular/material/radio';
 
 const Material = [
 	MatFormFieldModule,
@@ -37,8 +38,10 @@ const Material = [
 	MatExpansionModule,
 	MatTooltipModule,
 	MatTreeModule,
-
+	MatTableModule,
+	MatPaginatorModule,
+	MatRadioModule
 ];
 
-@NgModule({exports: Material})
+@NgModule({imports:Material,exports: Material})
 export class MaterialModule{}
