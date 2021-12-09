@@ -17,13 +17,12 @@ export const initialState: State = {
 
 export const reducer = createReducer(
 	initialState,
-	
-	on(UIActions.UI_Loading_True, (state) => ({ ...state, Loading: true })),
+	on(UIActions.UI_Loading_True,  (state) => ({ ...state, Loading: true })),
 	on(UIActions.UI_Loading_False, (state) => ({ ...state, Loading: false })),
-	on(UIActions.UI_Theme_Change, (state) => ({ ...state, Dark_Mode: state.Dark_Mode !== true }))
+	on(UIActions.UI_Theme_Change,  (state) => ({ ...state, Dark_Mode: state.Dark_Mode !== true }))
 );
 
 // export const selectUI        = (state: AppState) => state.ui;
-export const selectUI        =createFeatureSelector<State> (uiFeatureKey);
+export const selectUI        = createFeatureSelector<State> (uiFeatureKey);
 export const selectLoading   = createSelector(selectUI, (state: State) => state.Loading);
 export const selectDarkTheme = createSelector(selectUI, (state: State) => state.Dark_Mode);

@@ -34,16 +34,16 @@
                     <mat-icon>logout</mat-icon>
                     <span>logout</span>
                 </button>
-                <a mat-button>angular</a>
+                <a mat-button (click)="spinner_change()">Spinner </a>
             </div>
         </mat-toolbar>
         <mat-progress-bar mode="indeterminate" *ngIf="loading$ | async">
             <!-- *ngIf="loading$ | async" -->
         </mat-progress-bar>
         <div id="app-nav" [@routeAnimation]="getAnimationData(routerOutlet)">
+            <app-loader *ngIf="loading$ | async"></app-loader>
             <router-outlet #routerOutlet="outlet"></router-outlet>
         </div>
         <app-sidebar></app-sidebar>
     </mat-sidenav-content>
-    <app-loader *ngIf="loading$ | async"></app-loader>
 </mat-sidenav-container>

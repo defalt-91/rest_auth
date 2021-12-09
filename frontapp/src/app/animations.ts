@@ -48,10 +48,10 @@ export const slideInAnimation = trigger(
 			group(
 				[
 					query(':leave', [
-						animate('2200ms ease-out', style({ left: '100%' }))
+						animate('400ms ease-out', style({ left: '100%' }))
 					], { optional: true }),
 					query(':enter', [
-						animate('2300ms ease-out', style({ left: '0%' }))
+						animate('600ms ease-out', style({ left: '0%' }))
 					], { optional: true })
 				]),
 			query(':enter', animateChild(), { optional: true }),

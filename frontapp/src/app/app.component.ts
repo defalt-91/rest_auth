@@ -2,14 +2,14 @@ import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { Component }                       from "@angular/core";
 import { Title }                           from "@angular/platform-browser";
 import { Router, RouterOutlet }            from "@angular/router";
-import { Store }                           from "@ngrx/store";
+import { Store,select }                           from "@ngrx/store";
 import { Observable }                      from "rxjs";
-import { map, shareReplay }                from "rxjs/operators";
+import { map, share,take}                from "rxjs/operators";
 import { AppState }                        from "src/app/store";
 import { selectDarkTheme, selectLoading }  from "src/app/store/ui/ui.reducer";
 import { AuthService }                     from "./_services/auth.service";
 import { slideInAnimation }                from "./animations";
-import { UI_Theme_Change }                 from "./store/ui/ui.actions";
+import { UI_Theme_Change,UI_Loading_True, UI_Loading_False }                 from "./store/ui/ui.actions";
 import { clearStore }                      from "./store/UserFeatureStore/actions/user-feature-store.actions";
 
 
@@ -24,12 +24,11 @@ import { clearStore }                      from "./store/UserFeatureStore/action
 export class AppComponent{
 	Title                           = 'Frontend';
 	spin                            = false;
-	loading$                        = this.store.select(selectLoading);
+	loading$                        = this.store.pipe(select(selectLoading));
 	isDark$: Observable<boolean>    = this.store.select(selectDarkTheme);
 	// breakPoint
 	isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Large).pipe(
-		map((result) => result.matches),
-		shareReplay()
+		map((result) => result.matches)
 	);
 	
 	constructor(
@@ -41,7 +40,15 @@ export class AppComponent{
 	) {title.setTitle(this.Title)}
 	
 	getAnimationData(outlet: RouterOutlet):string|undefined { return outlet?.activatedRouteData?.animation}
-	logout():void {this.authService.logout()}
-	retttt():void  {this.store.dispatch(clearStore());}
-	ChangeTheme():void  {this.store.dispatch(UI_Theme_Change())}
+	logout():void {this.authService.logout()};
+	retttt():void  {this.store.dispatch(clearStore());};
+	ChangeTheme():void  {this.store.dispatch(UI_Theme_Change())};
+	spinner_change(){this.loading$.pipe(take(1)).subscribe(x=>{
+
+		if (x) {this.store.dispatch(UI_Loading_False())
+			
+		} else {
+			this.store.dispatch(UI_Loading_True())
+		} 
+		})};
 }

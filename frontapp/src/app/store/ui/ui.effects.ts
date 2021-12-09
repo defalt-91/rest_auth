@@ -16,17 +16,17 @@ export class UiEffects{
 		{ dispatch: true }
 	);
 	
-	Loading_end$ = createEffect(() => this.actions$.pipe(
-		ofType(ROUTER_NAVIGATED, ROUTER_CANCEL),
-		map(() => UIActions.UI_Loading_False())
-	));
+	Loading_end$ = createEffect(
+		() => this.actions$.pipe(
+			ofType(ROUTER_NAVIGATED, ROUTER_CANCEL),
+			map(() => UIActions.UI_Loading_False())
+	),
+	{ dispatch: true });
 	UI_Theme$    = createEffect(
 		() => this.actions$.pipe(
 			ofType(UIActions.UI_Theme_Change),
-			tap(() => {
-				this.uiService.ChangeTheme()
-			})
-		), { dispatch: false }
+			tap(() => this.uiService.ChangeTheme())), 
+			{ dispatch: false }
 	);
 	
 	constructor(private actions$: Actions, private uiService: UIService) {}
