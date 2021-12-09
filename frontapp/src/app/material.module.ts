@@ -15,7 +15,9 @@ import { MatSidenavModule }         from "@angular/material/sidenav";
 import { MatSnackBarModule }        from "@angular/material/snack-bar";
 import { MatToolbarModule }         from "@angular/material/toolbar";
 import { MatTooltipModule }         from "@angular/material/tooltip";
-
+import { MatTreeModule }  			from '@angular/material/tree';
+import { MatTableModule } 			from '@angular/material/table';
+import { MatPaginatorModule } 		from '@angular/material/paginator';
 
 const Material = [
 	MatFormFieldModule,
@@ -34,9 +36,9 @@ const Material = [
 	MatRippleModule,
 	MatExpansionModule,
 	MatTooltipModule,
+	MatTreeModule,
+
 ];
 
-@NgModule({
-	          exports: Material
-          })
+@NgModule({exports: Material})
 export class MaterialModule{}

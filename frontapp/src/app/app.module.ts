@@ -1,3 +1,4 @@
+import { TreeComponent } from 'src/app/components/tree/tree.component';
 import { CdkAccordionModule }                     from "@angular/cdk/accordion";
 import { LayoutModule }                           from "@angular/cdk/layout";
 import { HttpClientModule, HttpClientXsrfModule } from "@angular/common/http";
@@ -37,6 +38,7 @@ import { EllipsisComponent }                      from './components/ellipsis/el
       LoaderComponent,
       CarouselComponent,
       EllipsisComponent,
+      TreeComponent,
     ],
     imports: [
       BrowserModule,
